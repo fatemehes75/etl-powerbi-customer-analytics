@@ -11,3 +11,30 @@ The dataset used in this project consists of 286,392 entries across 36 columns, 
 Numerical Data: Item ID, quantity ordered, price, value, discount amount, total, customer ID, year, reference number, age, zip code, and discount percentage.
 Categorical Data: Order ID, order date, and order status.
 This dataset is ideal for analyzing purchasing patterns, identifying popular products, and understanding customer behavior. It also supports the development of predictive models for forecasting customer behavior and sales trends.
+
+## Key Objectives:
+
+1. ETL Process:
+* Extraction: Pull data from AWS S3 into Snowflake.
+* Transformation: Cleanse, transform, and model the data within Snowflake to ensure it is suitable for analysis.
+* Loading: Load the transformed data into Power BI for visualization and analysis.
+  
+2. Dashboard Development: Design and develop an interactive Power BI dashboard that provides insights into:
+* Customer Behavior: Analysis of purchasing patterns, frequency of purchases, and customer demographics.
+* Sales Trends: Identification of top-selling products, seasonal trends, and sales performance over time.
+* Discount Analysis: Impact of discounts on sales and customer purchasing behavior.
+
+3. Predictive Analytics: Implement basic machine learning models to predict future sales trends and customer behavior based on historical data.
+
+## Business Impact:
+The insights derived from this ETL project will empower the e-commerce business to make data-driven decisions, such as optimizing product offerings, personalizing marketing strategies, and improving customer satisfaction. By understanding customer behavior and sales trends, the business can better align its operations with customer needs, leading to increased sales and customer loyalty.
+
+## Technology Used:
+Data Storage: AWS S3
+Data Warehouse: Snowflake
+Data Visualization: Power BI
+ETL Tools: SQL, DAX (for Power BI)
+Cloud Platform: AWS
+
+## Conclusion:
+This ETL project demonstrates the ability to extract, transform, and load large datasets from cloud storage, create impactful visualizations, and generate actionable business insights. The customer-centric approach ensures that the business remains aligned with customer needs, fostering a competitive advantage in the e-commerce market.
