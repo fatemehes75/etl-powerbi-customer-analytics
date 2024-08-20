@@ -16,7 +16,8 @@ This dataset is ideal for analyzing purchasing patterns, identifying popular pro
 
 1. ETL Process:
 * Extraction: Pull data from AWS S3 into Snowflake.
-* Transformation: Cleanse, transform, and model the data within Snowflake to ensure it is suitable for analysis.
+* Automation: Set up a Snowpipe to automate the process of loading data from an S3 bucket into a Snowflake table. 
+* Transformation: Clean, transform, and model the data within Snowflake to ensure it is suitable for analysis.
 * Loading: Load the transformed data into Power BI for visualization and analysis.
   
 2. Dashboard Development: Design and develop an interactive Power BI dashboard that provides insights into:
@@ -30,11 +31,11 @@ This dataset is ideal for analyzing purchasing patterns, identifying popular pro
 The insights derived from this ETL project will empower the e-commerce business to make data-driven decisions, such as optimizing product offerings, personalizing marketing strategies, and improving customer satisfaction. By understanding customer behavior and sales trends, the business can better align its operations with customer needs, leading to increased sales and customer loyalty.
 
 ## Technology Used:
-Data Storage: AWS S3
-Data Warehouse: Snowflake
-Data Visualization: Power BI
-ETL Tools: SQL, DAX (for Power BI)
-Cloud Platform: AWS
+* Data Storage: AWS S3
+* Data Warehouse: Snowflake
+* Data Visualization: Power BI
+* ETL Tools: SQL, DAX (for Power BI)
+* Cloud Platform: AWS
 
 ## Conclusion:
 This ETL project demonstrates the ability to extract, transform, and load large datasets from cloud storage, create impactful visualizations, and generate actionable business insights. The customer-centric approach ensures that the business remains aligned with customer needs, fostering a competitive advantage in the e-commerce market.
