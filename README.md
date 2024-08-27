@@ -1,5 +1,7 @@
 # Customer Insights with Power BI: An E-commerce ETL Project
 
+<img width="1137" alt="Screenshot 2024-08-26 at 8 22 17 PM" src="https://github.com/user-attachments/assets/f09afe50-aba6-4177-8674-86aabe23dd58">
+
 ## Project Overview:
 This is an ETL (Extract, Transform, Load) project with Amazon S3, SnowFlake and Power BI. Project goals are:
   * Developing a customer-centric dashboard using Power BI to monitor and analyze customer data from an e-commerce platform.  The goal is to create actionable insights that enhance business decision-making by providing a comprehensive view of customer behavior, purchasing patterns, and sales trends.
