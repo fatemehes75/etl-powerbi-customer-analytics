@@ -1,0 +1,4 @@
+created_on,name,database_name,schema_name,definition,owner,notification_channel,comment,integration,pattern,error_integration,owner_role_type,invalid_reason,budget
+2024-08-20 17:10:55.649 -0700,CUSTOMER_LIST_PIPE,CUSTOMER_LIST_DB,PIPES,"COPY INTO CUSTOMER_LIST_DB.PUBLIC.customer_list
+FROM @CUSTOMER_LIST_DB.PUBLIC.csv_folder_stage
+FILE_FORMAT = (FORMAT_NAME = CUSTOMER_LIST_DB.PUBLIC.csv_fileformat)",ACCOUNTADMIN,arn:aws:sqs:ca-central-1:654654510736:sf-snowpipe-AIDAZQ3DTC2IDFS3UKQXF-hP0x6Gblgbgr_CgvzajmEg,,,,,ROLE,,
