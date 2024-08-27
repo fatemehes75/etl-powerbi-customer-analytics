@@ -1,0 +1,115 @@
+/* Step1:AWS INTEGERATION - Creating the storage integration object in order to have access to 
+credentials and connect to AWS S3. */
+
+// Create storage integration object
+CREATE OR REPLACE STORAGE INTEGRATION s3_integration
+    TYPE = EXTERNAL_STAGE
+    STORAGE_PROVIDER = 'S3'
+    ENABLED = TRUE
+    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::328532437175:role/mysnowflakerole'
+    STORAGE_ALLOWED_LOCATIONS = ('s3://customersnowflakeproject/');
+
+/* Using the DESC INTEGRATION command to retrieve the STORAGE_AWS_IAM_USER_ARN
+and STORAGE_AWS_EXTERNAL_ID so we can update it in S3 */
+DESC INTEGRATION s3_integration;
+
+
+/* Step2: LOADING DATA FROM S3
+/*Before we load the data into Snowflake from AWS S3 storage, we need to create a table in which the data will be stored.*/
+
+/* Create the Database */
+CREATE DATABASE CUSTOMER_LIST_DB;
+
+/* Use the Database */
+USE DATABASE CUSTOMER_LIST_DB;
+
+/* Create the Table in the PUBLIC Schema */
+CREATE OR REPLACE TABLE PUBLIC.customer_list (
+    order_id VARCHAR(50) NOT NULL,  -- Made order_id NOT NULL
+    order_date DATE,
+    status VARCHAR(50),
+    item_id BIGINT,
+    sku VARCHAR(100),
+    qty_ordered INT,
+    price FLOAT,
+    value FLOAT,
+    discount_amount FLOAT,
+    total FLOAT,
+    category VARCHAR(100),
+    payment_method VARCHAR(50),
+    bi_st VARCHAR(50),
+    cust_id BIGINT,
+    year INT,
+    month VARCHAR(10),
+    ref_num VARCHAR(20),
+    name_prefix VARCHAR(10),
+    first_name VARCHAR(50),
+    middle_initial CHAR(1),
+    last_name VARCHAR(50),
+    gender CHAR(1),
+    age INT,
+    full_name VARCHAR(100),
+    email VARCHAR(100),
+    customer_since DATE,
+    ssn VARCHAR(15),
+    phone_no VARCHAR(20),
+    place_name VARCHAR(50),
+    county VARCHAR(50),
+    city VARCHAR(50),
+    state CHAR(2),
+    zip VARCHAR(10),
+    region VARCHAR(20),
+    user_name VARCHAR(50),
+    discount_percent FLOAT
+);
+
+
+
+/* Step 3: Create the File Format*/
+CREATE OR REPLACE FILE FORMAT CUSTOMER_LIST_DB.PUBLIC.csv_fileformat
+    TYPE = 'CSV'
+    FIELD_DELIMITER = ','
+    SKIP_HEADER = 1
+    null_if = ('NULL','null')
+    empty_field_as_null = TRUE
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"' ;
+
+    
+
+/*Step 4: Create a Stage that References the Storage Integration and File Format*/
+CREATE OR REPLACE STAGE CUSTOMER_LIST_DB.PUBLIC.csv_folder_stage
+    URL = 's3://customersnowflakeproject/'
+    STORAGE_INTEGRATION = s3_integration
+    FILE_FORMAT = CUSTOMER_LIST_DB.PUBLIC.csv_fileformat
+    COMMENT = 'Stage referencing CSV files in S3 bucket.';
+    
+
+/*Step 5: Load the Data from the Staged File into the Target Table*/
+COPY INTO PUBLIC.customer_list
+FROM @CUSTOMER_LIST_DB.PUBLIC.csv_folder_stage
+
+
+-- View the Data.      
+
+SELECT * FROM CUSTOMER_LIST_DB.PUBLIC.customer_list
+
+
+
+
+
+/*Step 6 :Setting up a Snowpipe
+Snowpipe automatically fetches data once it is available in an AWS S3 bucket.*/
+-- Creating the Pipe Schema for storing all pipes
+CREATE OR REPLACE SCHEMA CUSTOMER_LIST_DB.pipes;
+-- Define the pipe
+CREATE OR REPLACE PIPE CUSTOMER_LIST_DB.pipes.customer_list_pipe
+AUTO_INGEST = TRUE
+AS
+COPY INTO CUSTOMER_LIST_DB.PUBLIC.customer_list
+FROM @CUSTOMER_LIST_DB.PUBLIC.csv_folder_stage
+FILE_FORMAT = (FORMAT_NAME = CUSTOMER_LIST_DB.PUBLIC.csv_fileformat);
+
+/* Describe the pipe to get the code to connect the trigger Snowpipe and 
+create event notification in the S3 Bucket */
+DESC PIPE CUSTOMER_LIST_DB.pipes.customer_list_pipe;
+
