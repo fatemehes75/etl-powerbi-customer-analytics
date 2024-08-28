@@ -8,7 +8,7 @@ This is an ETL (Extract, Transform, Load) project with Amazon S3, SnowFlake and 
   * Extracting data stored in an S3 bucket on AWS, transforming it within Snowflake, and loading it into Power BI for visualization.
 
 ## Dataset Description:
-The dataset used in this project consists of 286,392 entries across 36 columns, capturing detailed information about orders placed by customers on the e-commerce website. The dataset includes both numerical and categorical data, such as:
+The dataset used in this project consists of 286,392 entries across 36 columns, capturing detailed information about customer orders on the e-commerce website. The dataset includes both numerical and categorical data, such as:
 
 Numerical Data: Item ID, quantity ordered, price, value, discount amount, total, customer ID, year, reference number, age, zip code, and discount percentage.
 Categorical Data: Order ID, order date, and order status.
@@ -18,16 +18,15 @@ This dataset is ideal for analyzing purchasing patterns, identifying popular pro
 
 1. ETL Process:
 * Extraction: Pull data from AWS S3 into Snowflake.
-* Automation: Set up a Snowpipe to automate the process of loading data from an S3 bucket into a Snowflake table. 
+* Automation: Set up a Snowpipe to automate loading data from an S3 bucket into a Snowflake table. 
 * Transformation: Clean, transform, and model the data within Snowflake to ensure it is suitable for analysis.
 * Loading: Load the transformed data into Power BI for visualization and analysis.
   
 2. Dashboard Development: Design and develop an interactive Power BI dashboard that provides insights into:
-* Customer Behavior: Analysis of purchasing patterns, frequency of purchases, and customer demographics.
+* Customer Behavior: Revenue per State, Revenue based per Gender, Revenue based on Age and Percentage of Revenue per Region. 
 * Sales Trends: Identification of top-selling products, seasonal trends, and sales performance over time.
-* Discount Analysis: Impact of discounts on sales and customer purchasing behavior.
+* Discount Analysis: Impact of discounts on sales and customer purchasing behavior, Quantity - Discount Percentage Correlation.
 
-3. Predictive Analytics: Implement basic machine learning models to predict future sales trends and customer behavior based on historical data.
 
 ## Business Impact:
 The insights derived from this ETL project will empower the e-commerce business to make data-driven decisions, such as optimizing product offerings, personalizing marketing strategies, and improving customer satisfaction. By understanding customer behavior and sales trends, the business can better align its operations with customer needs, leading to increased sales and customer loyalty.
